@@ -1,29 +1,45 @@
-import {Layout as AntLayout} from 'antd';
-const {Header, Content, Footer} = AntLayout;
+import { Layout as AntLayout } from 'antd';
+import { useAuth } from '../contexts/useAuth.jsx';
+
+const { Header, Content, Footer } = AntLayout;
 
 
-export function Layout({children}) {
+export function Layout({ children }) {
+  let { isLoggedIn, logout } = useAuth();
+  console.log('isLoggedIn ', isLoggedIn);
 
-    return (
-        <>
-            <Header
-                style={{
-                    display: 'flex', alignItems: 'center',
-                }}
-            >
-                <h3 style={{color: "white"}}>Booker</h3>
+  async function onLogout() {
+    try {
+      await logout();
+      location.reload();
 
-            </Header>
-            <Content style={{height: "calc(100vh - 55px)"}}>
-                {children}
-            </Content>
-            <Footer
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                Ant Design ©2023 Created by Ant UED
-            </Footer>
-        </>
-    );
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+  return (
+    <>
+      <Header
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}
+      >
+        <h2 style={{ color: 'white' }}>Booker</h2>
+        {isLoggedIn && (<a style={{ color: 'white' }} onClick={onLogout}>Logout</a>)}
+
+      </Header>
+      <Content style={{ height: 'calc(100vh - 55px)' }}>
+        {children}
+      </Content>
+      <Footer
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Ant Design ©2023 Created by Ant UED
+      </Footer>
+    </>
+  );
 }

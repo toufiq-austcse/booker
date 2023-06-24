@@ -43,6 +43,9 @@ export class UserService {
 
   async validateUser(email: string, password: string): Promise<User> {
     const userDocument = await this.userRepository.findOne({ email });
+    if (!userDocument) {
+      throw new UnauthorizedException('Credentials are not valid.');
+    }
     const passwordIsValid = await bcrypt.compare(
       password,
       userDocument.password,

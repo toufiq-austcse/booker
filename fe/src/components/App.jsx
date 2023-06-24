@@ -6,6 +6,10 @@ import { Signup } from './pages/Signup.jsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ApolloClient, InMemoryCache } from 'apollo-boost';
 import { ApolloProvider, createHttpLink } from '@apollo/react-hooks';
+import { AuthProvider } from '../contexts/useAuth.jsx';
+import { Home } from './pages/Home.jsx';
+import PrivateRoute from './PrivateRoute.jsx';
+import PublicRoute from './PublicRoute.jsx';
 
 const App = () => {
   const httpLink = createHttpLink({
@@ -18,14 +22,18 @@ const App = () => {
   });
   return (
     <Router>
-      <ApolloProvider client={client}>
-        <Layout>
-          <Switch>
-            <Route exact path='/' component={Login} />
-            <Route exact path='/signup' component={Signup} />
-          </Switch>
-        </Layout>
-      </ApolloProvider>
+      <AuthProvider>
+        <ApolloProvider client={client}>
+          <Layout>
+            <Switch>
+              <PrivateRoute exact path='/' component={Home} />
+              <PublicRoute exact path='/login' component={Login} />
+              <PublicRoute exact path='/signup' component={Signup} />
+            </Switch>
+          </Layout>
+        </ApolloProvider>
+      </AuthProvider>
+
     </Router>
   );
 };

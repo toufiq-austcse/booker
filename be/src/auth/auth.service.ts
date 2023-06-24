@@ -29,10 +29,17 @@ export class AuthService {
     response.cookie('Authentication', token, {
       httpOnly: true,
       expires,
+      sameSite: 'none',
+      secure: true,
     });
   }
 
   logout(res: Response) {
-    res.cookie('Authentication', '', { expires: new Date(), httpOnly: true });
+    res.cookie('Authentication', '', {
+      expires: new Date(),
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+    });
   }
 }

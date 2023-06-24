@@ -58,16 +58,6 @@ export function SignupForm() {
       </Form.Item>
 
       <Form.Item
-        name='remember'
-        valuePropName='checked'
-        wrapperCol={{
-          offset: 6, span: 16,
-        }}
-      >
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
-
-      <Form.Item
         wrapperCol={{
           offset: 6, span: 16,
         }}

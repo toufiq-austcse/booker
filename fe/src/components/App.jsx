@@ -3,17 +3,20 @@ import { Layout } from './Layout.jsx';
 import { Login } from './pages/Login.jsx';
 import { Signup } from './pages/Signup.jsx';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ApolloClient, InMemoryCache } from 'apollo-boost';
-import { ApolloProvider, createHttpLink } from '@apollo/react-hooks';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+
 import { AuthProvider } from '../contexts/useAuth.jsx';
 import { Home } from './pages/Home.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 import PublicRoute from './PublicRoute.jsx';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 
 const App = () => {
   const httpLink = createHttpLink({
-    uri: 'http://localhost:3000/graphql',
+    uri: import.meta.env.VITE_APP_GRAPHQL_BASE_URL,
+    credentials: 'include',
+
+
   });
 
   const client = new ApolloClient({

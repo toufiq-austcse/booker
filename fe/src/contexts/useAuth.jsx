@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     console.log('called AuthProvider');
+
     async function checkAuth() {
       let res = await isAuthenticated();
       setIsLoggedIn(res.data);
@@ -21,18 +22,18 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function isAuthenticated() {
-    return axios.get('http://localhost:3000/auth', {
-      withCredentials: true
+    return axios.get(`${import.meta.env.VITE_APP_API_BASE_URL}/auth`, {
+      withCredentials: true,
     });
   }
 
   async function login(email, password) {
     try {
-      let res = await axios.post('http://localhost:3000/auth/login', {
+      let res = await axios.post(`${import.meta.env.VITE_APP_API_BASE_URL}/auth/login`, {
         email: email,
         password: password,
       }, {
-        withCredentials: true
+        withCredentials: true,
       });
       setIsLoggedIn(true);
       return res;
@@ -44,8 +45,8 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     try {
-      let res = await axios.post('http://localhost:3000/auth/logout', {}, {
-        withCredentials: true
+      let res = await axios.post(`${import.meta.env.VITE_APP_API_BASE_URL}/auth/logout`, {}, {
+        withCredentials: true,
       });
       setIsLoggedIn(false);
       return res;

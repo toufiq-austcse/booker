@@ -1,10 +1,5 @@
 import { Card } from 'antd';
 import { SignupForm } from '../SignupForm.jsx';
-import { ApolloClient } from 'apollo-boost';
-
-// const client = new ApolloClient({
-//   uri: 'http://localhost:3000/graphql',
-// });
 
 export function Signup() {
   return (

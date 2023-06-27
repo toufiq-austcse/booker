@@ -7,15 +7,28 @@ type User {
   email: String!
 }
 
+type Bookmark {
+  _id: String!
+  name: String!
+  user_id: String!
+  links: [String!]!
+}
+
 type Query {
   getUser(_id: String!): User!
+  listBookmarks: [Bookmark!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInputDto!): User!
+  createBookmark(createBookmarkInput: CreateBookmarkInputDto!): Bookmark!
 }
 
 input CreateUserInputDto {
   email: String!
   password: String!
+}
+
+input CreateBookmarkInputDto {
+  name: String!
 }

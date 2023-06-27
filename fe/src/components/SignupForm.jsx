@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/react-hooks';
 import { CREATE_USER } from '../queries/index.jsx';
+import { useMutation } from '@apollo/client';
 
 export function SignupForm() {
 

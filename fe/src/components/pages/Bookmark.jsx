@@ -1,9 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_BOOKMARK, UPDATE_BOOKMARK } from '../../queries/index.jsx';
 import { useParams } from 'react-router-dom';
-import { Button, Card } from 'antd';
+import { Button, Card, Col, Row } from 'antd';
 import React, { useState } from 'react';
 import { CreateLink } from '../CreateLink.jsx';
+import Meta from 'antd/es/card/Meta.js';
+import { Urls } from '../Urls.jsx';
 
 export function Bookmark() {
   const { id } = useParams();
@@ -63,7 +65,15 @@ export function Bookmark() {
         </Card>
 
       )}
+
       <CreateLink isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk} />
+
+      <div style={{
+        margin: '25px',
+      }}>
+        <Urls />
+      </div>
+
 
     </div>
   );

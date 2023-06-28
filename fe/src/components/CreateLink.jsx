@@ -2,7 +2,7 @@ import { Button, Form, Input, Modal } from 'antd';
 
 export function CreateLink({ isModalOpen, handleOk, handleCancel }) {
   return (
-    <Modal title='Create Link' centered open={isModalOpen} onCancel={handleCancel} footer={[
+    <Modal title='Create Url' centered open={isModalOpen} onCancel={handleCancel} footer={[
       <Button form='create-link-form' key='submit' htmlType='submit'>
         Create
       </Button>,
@@ -27,12 +27,12 @@ export function CreateLink({ isModalOpen, handleOk, handleCancel }) {
         autoComplete='off'
       >
         <Form.Item
-          label='Url'
+          label='Urls'
           name='url'
           rules={[
             {
               required: true,
-              message: 'Please input Url!',
+              message: 'Please input Urls!',
             },
           ]}
         >

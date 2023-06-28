@@ -51,6 +51,7 @@ export function Home() {
             }}>
               <Col span={4}>
                 <Card
+                  hoverable
                   title={bookmark.name}
                   bodyStyle={{ padding: 0 }}
                   style={{

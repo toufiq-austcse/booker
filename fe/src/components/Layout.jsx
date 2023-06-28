@@ -1,5 +1,6 @@
 import { Layout as AntLayout } from 'antd';
 import { useAuth } from '../contexts/useAuth.jsx';
+import React from 'react';
 
 const { Header, Content, Footer } = AntLayout;
 
@@ -20,7 +21,7 @@ export function Layout({ children }) {
 
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -30,7 +31,7 @@ export function Layout({ children }) {
         {isLoggedIn && (<a style={{ color: 'white' }} onClick={onLogout}>Logout</a>)}
 
       </Header>
-      <Content style={{ height: 'calc(100vh - 55px)' }}>
+      <Content>
         {children}
       </Content>
       <Footer
@@ -40,6 +41,6 @@ export function Layout({ children }) {
       >
         Ant Design ©2023 Created by Ant UED
       </Footer>
-    </>
+    </div>
   );
 }

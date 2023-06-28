@@ -3,17 +3,18 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/useAuth.jsx';
 
 export function LoginForm() {
-  let { login } = useAuth();
-  let history = useHistory();
+  const { login } = useAuth();
+  const history = useHistory();
 
   const onFinish = async (values) => {
     try {
-      let res = await login(values.email, values.password);
+      const res = await login(values.email, values.password);
       console.log('Success:', res);
       history.push('/');
 
     } catch (e) {
       console.log(e);
+      alert('error in login');
     }
 
   };

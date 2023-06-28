@@ -7,10 +7,10 @@ const { Header, Content, Footer } = AntLayout;
 
 
 export function Layout({ children }) {
-  let { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   console.log('isLoggedIn ', isLoggedIn);
 
-  async function onLogout() {
+  const onLogout = async () => {
     try {
       await logout();
       location.reload();
@@ -18,7 +18,7 @@ export function Layout({ children }) {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
 
   return (
@@ -34,7 +34,7 @@ export function Layout({ children }) {
         {isLoggedIn && (<a style={{ color: 'white' }} onClick={onLogout}>Logout</a>)}
 
       </Header>
-      <Content>
+      <Content style={{ height: 'calc(100vh - 55px)' }}>
         {children}
       </Content>
       <Footer

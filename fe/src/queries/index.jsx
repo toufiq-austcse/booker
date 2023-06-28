@@ -20,7 +20,7 @@ export const CREATE_BOOKMARK = gql`
 `;
 
 export const LIST_BOOKMARKS = gql`
-    {
+    query{
         listBookmarks{
             _id
             name

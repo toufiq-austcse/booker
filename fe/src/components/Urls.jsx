@@ -5,12 +5,13 @@ import { GET_LINKS } from '../queries/index.jsx';
 import React from 'react';
 
 export function Urls({ links }) {
-  console.log('links ', links);
+  console.log('links changed ', links);
   const { data, loading, error } = useQuery(GET_LINKS, {
     variables: {
       urls: links,
     },
   });
+  console.log('error ',error);
   console.log('result ', data);
   return (
     <Row style={{

@@ -15,7 +15,7 @@ type Bookmark {
 }
 
 type Link {
-  title: String!
+  title: String
   siteName: String
   url: String!
   images: [String!]!

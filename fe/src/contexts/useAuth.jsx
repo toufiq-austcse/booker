@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const AuthContext = React.createContext();
 
@@ -8,14 +9,28 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const [loading, setLoading] = useState(true);
   let [isLoggedIn, setIsLoggedIn] = useState(false);
+  let history = useHistory();
 
   useEffect(() => {
-    console.log('called AuthProvider');
+    setLoading(true);
 
     async function checkAuth() {
-      let res = await isAuthenticated();
-      setIsLoggedIn(res.data);
+      try {
+        console.log('called');
+        let res = await isAuthenticated();
+        setIsLoggedIn(res.data);
+        setLoading(false);
+
+      } catch (e) {
+        console.log('error', e);
+        setLoading(false);
+        if (!isLoggedIn) {
+          history.push('/login');
+        }
+      }
+
     }
 
     checkAuth();
@@ -65,7 +80,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 

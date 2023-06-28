@@ -3,7 +3,7 @@ import { Layout } from './Layout.jsx';
 import { Login } from './pages/Login.jsx';
 import { Signup } from './pages/Signup.jsx';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { AuthProvider } from '../contexts/useAuth.jsx';
 import { Home } from './pages/Home.jsx';
@@ -16,8 +16,6 @@ const App = () => {
   const httpLink = createHttpLink({
     uri: import.meta.env.VITE_APP_GRAPHQL_BASE_URL,
     credentials: 'include',
-
-
   });
 
   const client = new ApolloClient({

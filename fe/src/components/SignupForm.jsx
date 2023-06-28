@@ -1,19 +1,27 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Button, Form, Input } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
 import { CREATE_USER } from '../queries/index.jsx';
 import { useMutation } from '@apollo/client';
 
 export function SignupForm() {
+  const history = useHistory();
 
   const [createUsers] = useMutation(CREATE_USER);
   const onFinish = async (values) => {
-    let res = await createUsers({
-      variables: {
-        email: values.email,
-        password: values.password,
-      },
-    });
-    console.log('Success:', res);
+    try {
+      let res = await createUsers({
+        variables: {
+          email: values.email,
+          password: values.password,
+        },
+      });
+      console.log('Success:', res);
+      history.push('/login');
+    } catch (e) {
+      console.log('Error:', e);
+      alert('error in signup');
+    }
+
   };
 
 

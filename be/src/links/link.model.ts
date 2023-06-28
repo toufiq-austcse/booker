@@ -2,7 +2,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Link {
-  @Field()
+  @Field(() => String, { nullable: true })
   title: string;
 
   @Field(() => String, { nullable: true })
@@ -11,6 +11,6 @@ export class Link {
   @Field()
   url: string;
 
-  @Field(() => [String])
+  @Field(() => [String], { defaultValue: [] })
   images: string[];
 }

@@ -10,10 +10,13 @@ export function Url({ title, siteName, url, images = [] }) {
           style={{
             margin: '5px',
           }}
-          cover={<img alt='example'
-                      src={images.length > 0 ? images[0] : 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'} />}
+          cover={<img alt='image'
+                      src={images.length > 0 ? images[0] : 'https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png'}
+                      style={{
+                        height: '250px',
+                      }} />}
         >
-          <Meta title={title} description={siteName} />
+          <Meta title={title?title:'Title not found'} description={siteName?siteName:'Description not found'} />
         </Card>
       </a>
 

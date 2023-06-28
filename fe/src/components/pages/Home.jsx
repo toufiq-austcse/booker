@@ -7,18 +7,16 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
 export function Home() {
-  const { loading, error, data, refetch } = useQuery(LIST_BOOKMARKS, { refetchWritePolicy: 'merge' });
-  console.log('data', data);
+  const { loading, error, data, refetch } = useQuery(LIST_BOOKMARKS);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  let [isModalOpen, setIsModalOpen] = useState(false);
-
-  function showModal() {
+  const showModal = () => {
     setIsModalOpen(true);
-  }
+  };
 
-  function handleCancel() {
+  const handleCancel = () => {
     setIsModalOpen(false);
-  }
+  };
 
 
   const [createBookmark] = useMutation(CREATE_BOOKMARK);
@@ -36,14 +34,19 @@ export function Home() {
       setIsModalOpen(false);
       refetch();
     } catch (e) {
-      throw new Error(e);
+      console.log('Error:', e);
+      alert('error in bookmark creation');
     }
 
   };
 
   return (
     <div style={{ margin: '25px' }}>
-      <Row >
+      <Row style={{
+        justifyContent: 'center',
+      }}>
+        {loading && <p>Loading...</p>}
+        {error && <p>Error :(</p>}
         {data && data.listBookmarks.map((bookmark, index) => {
           return (
             <Link key={index} to={{

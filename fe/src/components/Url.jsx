@@ -1,19 +1,22 @@
 import { Card, Col } from 'antd';
 import Meta from 'antd/es/card/Meta.js';
 
-export function Url() {
+export function Url({ title, siteName, url, images = [] }) {
   return (
-    <Col span={4}>
-      <Card
-        hoverable
-        style={{
-          width: 240,
-          margin: '5px',
-        }}
-        cover={<img alt='example' src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png' />}
-      >
-        <Meta title='Europe Street beat' description='www.instagram.com' />
-      </Card>
+    <Col span={5}>
+      <a href={url} target='_blank' rel='noopener noreferrer'>
+        <Card
+          hoverable
+          style={{
+            margin: '5px',
+          }}
+          cover={<img alt='example'
+                      src={images.length > 0 ? images[0] : 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'} />}
+        >
+          <Meta title={title} description={siteName} />
+        </Card>
+      </a>
+
     </Col>
   );
 }

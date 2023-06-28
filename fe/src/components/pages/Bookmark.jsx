@@ -1,10 +1,9 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_BOOKMARK, UPDATE_BOOKMARK } from '../../queries/index.jsx';
 import { useParams } from 'react-router-dom';
-import { Button, Card, Col, Row } from 'antd';
+import { Button, Card } from 'antd';
 import React, { useState } from 'react';
 import { CreateLink } from '../CreateLink.jsx';
-import Meta from 'antd/es/card/Meta.js';
 import { Urls } from '../Urls.jsx';
 
 export function Bookmark() {
@@ -30,7 +29,7 @@ export function Bookmark() {
       let res = await updateBookmark({
         variables: {
           id: id,
-          links: [values.url],
+          links: [...data.getBookmark.links, values.url],
         },
       });
       console.log('Success:', res);
@@ -52,28 +51,28 @@ export function Bookmark() {
       {loading && <p>Loading...</p>}
       {error && <p>Error :(</p>}
       {data && (
-        <Card
-          title={data.getBookmark.name}
-          extra={<Button onClick={onAddBookMarkClick}>+</Button>}
-          style={{
-            width: '100%',
-          }}
-          bodyStyle={{
-            padding: '0px',
-          }}
-        >
-        </Card>
+        <>
+          <Card
+            title={data.getBookmark.name}
+            extra={<Button onClick={onAddBookMarkClick}>+</Button>}
+            style={{
+              width: '100%',
+            }}
+            bodyStyle={{
+              padding: '0px',
+            }}
+          >
+          </Card>
+          <Urls style={{
+            margin: '25px',
+          }} links={data.getBookmark.links} />
+
+        </>
+
 
       )}
 
       <CreateLink isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk} />
-
-      <div style={{
-        margin: '25px',
-      }}>
-        <Urls />
-      </div>
-
 
     </div>
   );

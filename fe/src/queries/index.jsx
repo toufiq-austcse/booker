@@ -32,6 +32,7 @@ export const GET_BOOKMARK = gql`
         getBookmark(_id:$id){
             _id
             name
+            links
         }
     }
 `;
@@ -45,4 +46,14 @@ export const UPDATE_BOOKMARK = gql`
 
     }
 
-`
+`;
+export const GET_LINKS = gql`
+    query ($urls:[String!]!){
+        getLinks(urls: $urls){
+            title
+            siteName
+            images
+            url
+        }
+    }
+`;

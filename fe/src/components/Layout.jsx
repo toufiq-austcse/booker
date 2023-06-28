@@ -1,6 +1,7 @@
 import { Layout as AntLayout } from 'antd';
 import { useAuth } from '../contexts/useAuth.jsx';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const { Header, Content, Footer } = AntLayout;
 
@@ -27,7 +28,9 @@ export function Layout({ children }) {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}
       >
-        <h2 style={{ color: 'white' }}>Booker</h2>
+        <Link to='/'>
+          <h2 style={{ color: 'white' }}>Booker</h2>
+        </Link>
         {isLoggedIn && (<a style={{ color: 'white' }} onClick={onLogout}>Logout</a>)}
 
       </Header>

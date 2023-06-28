@@ -7,6 +7,7 @@ import { DatabaseModule } from './common/database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { BookmarkModule } from './bookmark/bookmark.module';
+import { LinksModule } from './links/links.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { BookmarkModule } from './bookmark/bookmark.module';
     UsersModule,
     AuthModule,
     BookmarkModule,
+    LinksModule,
   ],
   controllers: [],
   providers: [],

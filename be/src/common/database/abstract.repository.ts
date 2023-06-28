@@ -1,5 +1,6 @@
 import { AbstractDocument } from './abstract.schema';
-import { FilterQuery, Model, Types } from 'mongoose';
+import { FilterQuery, Model, Types, UpdateQuery } from 'mongoose';
+import { NotFoundException } from '@nestjs/common';
 
 export class AbstractRepository<TDocument extends AbstractDocument> {
   constructor(private readonly model: Model<TDocument>) {}
@@ -18,5 +19,21 @@ export class AbstractRepository<TDocument extends AbstractDocument> {
 
   async find(filterQuery: FilterQuery<TDocument>): Promise<TDocument[]> {
     return this.model.find(filterQuery, {}, { lean: true });
+  }
+
+  async findOneAndUpdate(
+    filterQuery: FilterQuery<TDocument>,
+    update: UpdateQuery<TDocument>,
+  ) {
+    const document = await this.model.findOneAndUpdate(filterQuery, update, {
+      lean: true,
+      new: true,
+    });
+
+    if (!document) {
+      throw new NotFoundException('Document not found.');
+    }
+
+    return document;
   }
 }

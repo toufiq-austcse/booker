@@ -14,14 +14,24 @@ type Bookmark {
   links: [String!]!
 }
 
+type Link {
+  title: String!
+  siteName: String
+  url: String!
+  images: [String!]!
+}
+
 type Query {
   getUser(_id: String!): User!
   listBookmarks: [Bookmark!]!
+  getBookmark(_id: String!): Bookmark!
+  getLinks(urls: [String!]!): [Link!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInputDto!): User!
   createBookmark(createBookmarkInput: CreateBookmarkInputDto!): Bookmark!
+  updateBookmark(updateBookmarkInput: UpdateBookmarkInputDto!): Bookmark!
 }
 
 input CreateUserInputDto {
@@ -31,4 +41,9 @@ input CreateUserInputDto {
 
 input CreateBookmarkInputDto {
   name: String!
+}
+
+input UpdateBookmarkInputDto {
+  _id: String!
+  links: [String!]!
 }

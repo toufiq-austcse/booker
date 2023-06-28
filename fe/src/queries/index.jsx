@@ -26,4 +26,23 @@ export const LIST_BOOKMARKS = gql`
             name
         }
     }
+`;
+export const GET_BOOKMARK = gql`
+    query ($id:String!){
+        getBookmark(_id:$id){
+            _id
+            name
+        }
+    }
+`;
+export const UPDATE_BOOKMARK = gql`
+    mutation ($id:String!,$links:[String!]!){
+        updateBookmark(updateBookmarkInput:{links:$links,_id:$id}){
+            _id
+            name
+            links
+        }
+
+    }
+
 `

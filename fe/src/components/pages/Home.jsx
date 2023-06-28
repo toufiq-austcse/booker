@@ -4,6 +4,7 @@ import { CreateBookmark } from '../CreateBookmark.jsx';
 import React, { useState } from 'react';
 import { CREATE_BOOKMARK, LIST_BOOKMARKS } from '../../queries/index.jsx';
 import { useMutation, useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
 export function Home() {
   const { loading, error, data, refetch } = useQuery(LIST_BOOKMARKS, { refetchWritePolicy: 'merge' });
@@ -42,10 +43,12 @@ export function Home() {
 
   return (
     <div style={{ margin: '25px' }}>
-      <Row gutter={16}>
+      <Row >
         {data && data.listBookmarks.map((bookmark, index) => {
           return (
-            <React.Fragment key={index}>
+            <Link key={index} to={{
+              pathname: `/bookmarks/${bookmark._id}`,
+            }}>
               <Col span={4}>
                 <Card
                   title={bookmark.name}
@@ -56,7 +59,7 @@ export function Home() {
                   }}
                 />
               </Col>
-            </React.Fragment>
+            </Link>
           );
         })}
 

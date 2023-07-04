@@ -7,7 +7,7 @@ A Bookmark Manager App
 - MongoDB : As data storage
 - GraphQL
 - Docker : To build and run the deployment images
-- FE: ReactJs, AntDesign
+- FE: ReactJs, Ant Design
 
 ## Screenshots
 Some screenshots of the application.
